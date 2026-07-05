@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Katalog produk B2B PT Kharisma Prima Abadi. Temukan kecap manis, kecap asin, saus sambal, saus tomat, dan cuka berkualitas tinggi untuk kebutuhan industri kuliner.">
+    <title>Katalog Produk B2B | PT Kharisma Prima Abadi</title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Product Page Specific Styles */
+        .product-hero {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light);
+            padding: 10rem 0 5rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .product-hero h1 {
+            color: var(--color-text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Filter Tab Bar */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            padding: 0.75rem 1.75rem;
+            border-radius: 4px;
+            border: 1px solid var(--color-border);
+            background-color: white;
+            color: var(--color-primary);
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            border-color: var(--color-primary);
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.01);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(26, 58, 42, 0.05);
+            border-color: var(--color-accent);
+        }
+
+        .product-card-image {
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+            background-color: #F8F5F0;
+        }
+
+        .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .product-card:hover .product-card-image img {
+            transform: scale(1.05);
+        }
+
+        .product-card-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category-tag {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-short-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .product-card-footer {
+            margin-top: auto;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .product-card:hover .product-card-footer {
+            color: var(--color-accent);
+        }
+
+        .product-card-footer svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            transition: var(--transition-fast);
+        }
+
+        .product-card:hover .product-card-footer svg {
+            transform: translateX(4px);
+        }
+
+        /* Detail Side Drawer */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 33, 22, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-drawer {
+            position: fixed;
+            top: 0;
+            right: -600px;
+            width: 100%;
+            max-width: 550px;
+            height: 100%;
+            background-color: white;
+            z-index: 2001;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+            transition: var(--transition-smooth);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-drawer.active {
+            right: 0;
+        }
+
+        .drawer-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 10;
+        }
+
+        .drawer-close-btn {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #F8F5F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .drawer-close-btn:hover {
+            background-color: var(--color-secondary);
+            color: white;
+        }
+
+        .drawer-body {
+            padding: 2rem;
+            flex-grow: 1;
+        }
+
+        .drawer-image-wrapper {
+            height: 350px;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #F8F5F0;
+            margin-bottom: 2rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .drawer-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .drawer-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 2rem 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 3px solid var(--color-accent);
+            padding-left: 0.75rem;
+        }
+
+        .sizes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .size-badge {
+            background-color: #F8F5F0;
+            border: 1px solid var(--color-border);
+            color: var(--color-primary);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .usage-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .drawer-footer {
+            padding: 2rem;
+            border-top: 1px solid var(--color-border);
+            position: sticky;
+            bottom: 0;
+            background-color: white;
+            z-index: 10;
+        }
+
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-drawer {
+                max-width: 100%;
+                right: -100%;
+            }
+
+            .drawer-image-wrapper {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+
+    <!-- Floating Navbar -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-transparent.png" class="logo-img" alt="Logo PT Kharisma Prima Abadi">
+                <span class="logo-text">KHARISMA PRIMA ABADI</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="tentang.html" class="nav-link">Tentang Kami</a></li>
+                    <li><a href="produk.html" class="nav-link active">Produk</a></li>
+                    <li><a href="manufaktur.html" class="nav-link">Manufaktur</a></li>
+                    <li><a href="mengapa-kami.html" class="nav-link">Mengapa Kami</a></li>
+                    <li><a href="jaminan-mutu.html" class="nav-link">Jaminan Mutu</a></li>
+                    <li><a href="kontak.html" class="nav-link nav-cta">Hubungi Kami</a></li>
+                </ul>
+            </nav>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header Hero -->
+    <section class="product-hero">
+        <div class="container">
+            <div class="reveal">
+                <span class="subtitle">Portofolio Produk</span>
+                <h1>Katalog Produk B2B Kami</h1>
+                <p style="max-width: 600px; margin: 1rem auto 0; color: #CCCCCC;">Temukan produk kecap, saus sambal,
+                    saus tomat, dan cuka berkualitas tinggi untuk mendukung kebutuhan pasokan katering, grosir, dan
+                    usaha kuliner Anda.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Katalog Section -->
+    <section class="section-padding">
+        <div class="container">
+            <!-- Filter buttons -->
+            <div class="filter-container reveal">
+                <button class="filter-btn active" data-filter="all">Semua Produk</button>
+                <button class="filter-btn" data-filter="kecap">Kecap</button>
+                <button class="filter-btn" data-filter="sambal">Saus Sambal &amp; Tomat</button>
+                <button class="filter-btn" data-filter="cuka">Cuka</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="products-grid reveal reveal-delay-1">
+                <!-- Product 1: Kecap Primasari Hijau 625 ml -->
+                <div class="product-card" data-category="kecap" data-id="kecap-primasari-hijau-625"
+                    data-category-name="Kecap" data-sizes="625 ml"
+                    data-usage="Sangat ideal untuk pelengkap hidangan meja, cocolan makanan, marinasi daging, tumisan, mie goreng, nasi goreng, dan bakso."
+                    data-description="Kecap manis Primasari Hijau diproses melalui fermentasi alami kedelai hitam berkualitas tinggi yang dipadukan dengan nira kelapa murni pilihan. Menghasilkan kekentalan pas, warna hitam pekat berkilau, dan rasa manis gurih yang medok tanpa penguat rasa buatan.">
+                    <div class="product-card-image">
+                        <img src="assets/Kecap/Kecap Primasari Hijau 625 ml.png" alt="Kecap Primasari Hijau 625 ml">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Kecap</span>
+                        <h3 class="product-title">Kecap Primasari Hijau 625 ml</h3>
+                        <p class="product-short-desc">Kecap manis fermentasi alami kedelai hitam dengan nira kelapa
+                            murni, menghasilkan rasa manis gurih medok kemasan 625 ml.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2: Kecap Primasari Hijau 360 ml -->
+                <div class="product-card" data-category="kecap" data-id="kecap-primasari-hijau-360"
+                    data-category-name="Kecap" data-sizes="360 ml"
+                    data-usage="Sangat praktis untuk digunakan di dapur rumah makan, restoran, katering, serta untuk keperluan konsumsi harian keluarga."
+                    data-description="Kecap manis Primasari Hijau dalam kemasan botol sedang 360 ml yang praktis. Menawarkan rasa manis gurih karamel yang khas dan meresap sempurna hingga ke dalam serat masakan.">
+                    <div class="product-card-image">
+                        <img src="assets/Kecap/Primasari Kecap Hijau 360 ml.png" alt="Kecap Primasari Hijau 360 ml">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Kecap</span>
+                        <h3 class="product-title">Kecap Primasari Hijau 360 ml</h3>
+                        <p class="product-short-desc">Rasa manis gurih karamel khas Primasari Hijau dalam kemasan botol
+                            sedang 360 ml yang praktis untuk katering.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3: Kecap Primasari Merah 625 ml -->
+                <div class="product-card" data-category="kecap" data-id="kecap-primasari-merah-625"
+                    data-category-name="Kecap" data-sizes="625 ml"
+                    data-usage="Direkomendasikan untuk bumbu masakan tumisan, bakar-bakaran, serta pelengkap hidangan mie ayam, bakso, soto, dan konsumsi komersil Horeka."
+                    data-description="Kecap manis Primasari varian Merah kemasan 625 ml memberikan aroma kedelai fermentasi yang wangi dan cita rasa manis gurih tradisional yang lebih mantap. Pilihan ekonomis dengan kualitas rasa premium untuk kebutuhan kuliner komersial Anda.">
+                    <div class="product-card-image">
+                        <img src="assets/Kecap/Kecap Primasari Merah 625 ml.png" alt="Kecap Primasari Merah 625 ml">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Kecap</span>
+                        <h3 class="product-title">Kecap Primasari Merah 625 ml</h3>
+                        <p class="product-short-desc">Kecap manis aromatik dengan cita rasa tradisional yang mantap dan
+                            ekonomis untuk bisnis kuliner Horeka.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4: Kecap Primasari Merah 6 kg -->
+                <div class="product-card" data-category="kecap" data-id="kecap-primasari-merah-6kg"
+                    data-category-name="Kecap" data-sizes="6 kg"
+                    data-usage="Sangat cocok untuk pasokan industri makanan skala besar, pabrik mie, katering pernikahan/massal, serta kebutuhan grosir industri."
+                    data-description="Kemasan jerigen bulk ekonomis 6 kg dari Kecap Primasari Merah. Diformulasikan khusus untuk menjaga konsistensi rasa masakan dalam jumlah besar, memastikan profitabilitas bisnis kuliner Anda tetap optimal dengan kualitas terjamin.">
+                    <div class="product-card-image">
+                        <img src="assets/Kecap/Kecap Primasari Merah 6 kg_.png" alt="Kecap Primasari Merah 6 kg">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Kecap</span>
+                        <h3 class="product-title">Kecap Primasari Merah 6 kg</h3>
+                        <p class="product-short-desc">Kemasan jerigen bulk besar 6 kg ekonomis untuk konsistensi masakan
+                            industri kuliner dan pasokan grosir tonase tinggi.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5: Saus Sambal Primasari 625 gr -->
+                <div class="product-card" data-category="sambal" data-id="sambal-primasari-625"
+                    data-category-name="Saus Sambal & Tomat" data-sizes="625 gr"
+                    data-usage="Cocok untuk pelengkap sajian mie instan, bakso, mie ayam, cocolan kentang goreng, ayam goreng, martabak, dan aneka gorengan."
+                    data-description="Saus sambal pedas nikmat Primasari kemasan botol besar 625 gr. Terbuat dari cabai merah segar pilihan petani lokal Yogyakarta dan bawang putih murni. Memiliki warna merah menyala alami dan tekstur yang kental halus.">
+                    <div class="product-card-image">
+                        <img src="assets/Sambal/Sambal 625 gr.png" alt="Saus Sambal Primasari 625 gr">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Saus Sambal</span>
+                        <h3 class="product-title">Saus Sambal Primasari 625 gr</h3>
+                        <p class="product-short-desc">Saus sambal pedas nikmat terbuat dari cabai merah segar lokal dan
+                            bawang putih murni dalam kemasan botol 625 gr.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6: Saus Sambal Primasari 600 gr -->
+                <div class="product-card" data-category="sambal" data-id="sambal-primasari-600"
+                    data-category-name="Saus Sambal & Tomat" data-sizes="600 gr"
+                    data-usage="Sangat baik digunakan untuk kebutuhan katering, rumah makan padang, cocolan gorengan, dan aneka sajian kuliner cepat saji."
+                    data-description="Varian kemasan pouch hemat 600 gr untuk Saus Sambal Primasari. Menghasilkan rasa pedas-asam-gurih seimbang yang membangkitkan selera makan tanpa sensasi pedas kimiawi.">
+                    <div class="product-card-image">
+                        <img src="assets/Sambal/Sambal 600 gr.png" alt="Saus Sambal Primasari 600 gr">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Saus Sambal</span>
+                        <h3 class="product-title">Saus Sambal Primasari 600 gr</h3>
+                        <p class="product-short-desc">Saus sambal kemasan pouch hemat 600 gr dengan rasa
+                            pedas-asam-gurih seimbang dari bahan cabai segar.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7: Saus Sambal Ketela Primasari 625 ml -->
+                <div class="product-card" data-category="sambal" data-id="sambal-ketela-primasari-625"
+                    data-category-name="Saus Sambal & Tomat" data-sizes="625 ml"
+                    data-usage="Sangat ekonomis untuk industri katering skala besar, pedagang kaki lima, warung bakso dan mie, serta bahan campuran saus lainnya."
+                    data-description="Saus sambal dengan tambahan ketela pilihan berkualitas tinggi untuk menghasilkan tekstur kental yang stabil saat dimasak kembali, serta warna merah yang tahan lama. Pilihan paling efisien untuk menekan biaya operasional usaha kuliner Anda.">
+                    <div class="product-card-image">
+                        <img src="assets/Sambal/Sambal Ketela 625 ml.png" alt="Saus Sambal Ketela Primasari 625 ml">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Saus Sambal</span>
+                        <h3 class="product-title">Saus Sambal Ketela Primasari 625 ml</h3>
+                        <p class="product-short-desc">Saus sambal dengan campuran ketela pilihan untuk tekstur kental
+                            stabil, sangat ekonomis bagi katering masal.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8: Cuka Makan Primasari 80 ml -->
+                <div class="product-card" data-category="cuka" data-id="cuka-primasari-80" data-category-name="Cuka"
+                    data-sizes="80 ml"
+                    data-usage="Paling disukai sebagai pelengkap langsung di meja konsumen untuk warung bakso, soto, mie ayam, pempek, maupun keperluan dapur skala kecil."
+                    data-description="Cuka makan murni Primasari kemasan botol kecil 80 ml yang praktis. Memberikan rasa asam bersih, jernih tanpa endapan, serta stabil untuk menyeimbangkan cita rasa kuah kaldu.">
+                    <div class="product-card-image">
+                        <img src="assets/Cuka/80 ml.png" alt="Cuka Makan Primasari 80 ml">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Cuka</span>
+                        <h3 class="product-title">Cuka Makan Primasari 80 ml</h3>
+                        <p class="product-short-desc">Cuka pangan murni kemasan kecil 80 ml yang praktis and jernih, pas
+                            untuk penyediaan di meja saji rumah makan.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9: Cuka Makan Primasari 210 ml -->
+                <div class="product-card" data-category="cuka" data-id="cuka-primasari-210" data-category-name="Cuka"
+                    data-sizes="210 ml"
+                    data-usage="Ideal untuk pembuatan acar buah/sayur, kuah pempek, marinasi daging/seafood, serta bumbu dapur restoran dan katering."
+                    data-description="Cuka makan murni Primasari kemasan botol sedang 210 ml. Memiliki tingkat kejernihan tinggi dan keasaman pangan (acetic acid) yang stabil serta higienis.">
+                    <div class="product-card-image">
+                        <img src="assets/Cuka/210.png" alt="Cuka Makan Primasari 210 ml">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Cuka</span>
+                        <h3 class="product-title">Cuka Makan Primasari 210 ml</h3>
+                        <p class="product-short-desc">Cuka pangan murni kemasan botol sedang 210 ml untuk kebutuhan
+                            dapur katering, pembuatan acar, jernih tanpa endapan.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 10: Cuka Makan Primasari 625 ml -->
+                <div class="product-card" data-category="cuka" data-id="cuka-primasari-625" data-category-name="Cuka"
+                    data-sizes="625 ml"
+                    data-usage="Direkomendasikan untuk pabrik pembuatan tahu, saus asam manis skala besar, industri acar komersial, katering massal, dan grosir."
+                    data-description="Kemasan botol besar ekonomis 625 ml dari Cuka Makan Primasari. Menawarkan efisiensi tinggi bagi pelaku industri pangan skala menengah hingga besar yang membutuhkan asam pangan bermutu tinggi secara rutin.">
+                    <div class="product-card-image">
+                        <img src="assets/Cuka/625 ml.png" alt="Cuka Makan Primasari 625 ml">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category-tag">Cuka</span>
+                        <h3 class="product-title">Cuka Makan Primasari 625 ml</h3>
+                        <p class="product-short-desc">Cuka pangan murni kemasan botol besar 625 ml, sangat ekonomis
+                            untuk pengolahan industri makanan skala besar.</p>
+                        <div class="product-card-footer">
+                            Detail Ukuran &amp; Spec
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Side Drawer Component -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="product-drawer" id="product-drawer">
+        <div class="drawer-header">
+            <span class="product-category-tag" id="drawer-product-category">Kategori</span>
+            <button class="drawer-close-btn" id="drawer-close" aria-label="Tutup Detail">&times;</button>
+        </div>
+        <div class="drawer-body">
+            <h2 id="drawer-product-title" style="margin-bottom: 1.5rem;">Nama Produk</h2>
+            <div class="drawer-image-wrapper">
+                <img id="drawer-product-image" src="" alt="">
+            </div>
+
+            <p id="drawer-product-desc" style="line-height: 1.8; margin-bottom: 2rem;">Deskripsi lengkap produk.</p>
+
+            <h4 class="drawer-section-title">Ukuran Kemasan B2B</h4>
+            <div class="sizes-container" id="drawer-product-sizes">
+                <!-- Badges dynamically added -->
+            </div>
+
+            <h4 class="drawer-section-title">Rekomendasi Aplikasi Kuliner</h4>
+            <p class="usage-text" id="drawer-product-usage">Saran aplikasi komersial.</p>
+        </div>
+        <div class="drawer-footer">
+            <a href="kontak.html" class="btn btn-primary" style="width: 100%; box-sizing: border-box;">Hubungi Sales /
+                Minta Penawaran</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo" style="margin-bottom: 1.5rem; display: inline-flex;">
+                        <img src="assets/logo-transparent.png" class="logo-img" alt="Logo PT Kharisma Prima Abadi">
+                    </a>
+                    <p>Produsen terpercaya saus sambal, cuka makan, dan kecap berkualitas tinggi dengan kapasitas
+                        manufaktur andal di Yogyakarta.</p>
+                    <div class="footer-certifications">
+                        <div class="footer-cert-badge">HALAL INDONESIA</div>
+                        <div class="footer-cert-badge">BPOM MD</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Halaman</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="tentang.html">Tentang Kami</a></li>
+                        <li><a href="produk.html">Katalog Produk</a></li>
+                        <li><a href="manufaktur.html">Manufaktur</a></li>
+                        <li><a href="mengapa-kami.html">Mengapa Kami</a></li>
+                        <li><a href="jaminan-mutu.html">Jaminan Mutu</a></li>
+                        <li><a href="kontak.html">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Produk B2B</h4>
+                    <ul class="footer-links">
+                        <li><a href="produk.html?cat=kecap">Kecap Manis Industri</a></li>
+                        <li><a href="produk.html?cat=kecap">Kecap Asin Horeka</a></li>
+                        <li><a href="produk.html?cat=sambal">Saus Sambal Grosir</a></li>
+                        <li><a href="produk.html?cat=cuka">Cuka Pangan Masal</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Kontak &amp; Pabrik</h4>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                        <span>Sleman, Daerah Istimewa Yogyakarta, Indonesia</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <span>sales@kharismaprimaabadi.co.id</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                        <span>+62 811-2345-6789 (Sales)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 PT Kharisma Prima Abadi. Semua Hak Cipta Dilindungi. Desain Profil Premium.</p>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="#" style="color: #8E9F95;">Syarat &amp; Ketentuan</a>
+                    <a href="#" style="color: #8E9F95;">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6281123456789?text=Halo%20Sales%20PT%20Kharisma%20Prima%20Abadi,%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20produk%20kecap/sambal/cuka%20untuk%20B2B."
+        class="whatsapp-float" target="_blank" aria-label="Kontak Sales via WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.592 1.97 14.12 .947 11.986.947c-5.442 0-9.87 4.372-9.875 9.802-.002 1.797.485 3.55 1.411 5.148l-.992 3.626 3.73-.974zm12.385-6.862c-.272-.136-1.61-.794-1.86-.885-.25-.091-.432-.136-.613.136-.182.273-.703.885-.862 1.068-.159.182-.318.205-.59.069-.272-.136-1.15-.424-2.19-1.354-.809-.722-1.354-1.616-1.513-1.888-.159-.272-.017-.42.12-.556.122-.122.272-.318.408-.477.136-.159.182-.272.272-.454.091-.182.045-.341-.023-.477-.068-.136-.613-1.477-.84-2.023-.22-.53-.443-.458-.613-.466-.159-.008-.34-.01-.522-.01s-.477.068-.727.341c-.25.272-.954.932-.954 2.273s.977 2.636 1.114 2.818c.136.182 1.92 2.931 4.653 4.114.65.281 1.157.449 1.553.575.653.208 1.248.178 1.718.108.524-.078 1.61-.659 1.838-1.296.227-.636.227-1.182.159-1.296-.068-.114-.25-.182-.523-.318z" />
+        </svg>
+    </a>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+    <script>
+        // Automatic category filter parsing from URL query parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cat = urlParams.get('cat');
+            if (cat) {
+                const targetBtn = document.querySelector(`.filter-btn[data-filter="${cat}"]`);
+                if (targetBtn) {
+                    // Trigger click to filter products
+                    setTimeout(() => {
+                        targetBtn.click();
+                    }, 100);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

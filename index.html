@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="PT Kharisma Prima Abadi - Produsen B2B kecap manis, saus sambal, dan cuka premium skala besar di Yogyakarta. Melayani katering, jaringan Horeka, grosir, dan distribusi nasional.">
+    <title>PT Kharisma Prima Abadi | Produsen B2B Kecap, Sambal & Cuka Premium</title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Homepage Specific Styles */
+        .brand-statement {
+            background-color: var(--color-bg-light);
+            text-align: center;
+        }
+
+        .brand-statement-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .brand-statement h2 {
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+
+        .brand-statement p {
+            font-size: 1.2rem;
+            color: var(--color-text-dark);
+            opacity: 0.85;
+            line-height: 1.8;
+        }
+
+        /* Category Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        .category-card {
+            position: relative;
+            height: 480px;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: var(--color-primary);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-end;
+            padding: 2.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(26, 58, 42, 0.95) 20%, rgba(26, 58, 42, 0) 70%);
+            z-index: 2;
+            transition: var(--transition-smooth);
+        }
+
+        .category-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: var(--transition-smooth);
+            opacity: 0.8;
+        }
+
+        .category-card:hover .category-image {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .category-card:hover::before {
+            background: linear-gradient(to top, rgba(26, 58, 42, 0.98) 30%, rgba(26, 58, 42, 0.1) 80%);
+        }
+
+        .category-info {
+            position: relative;
+            z-index: 3;
+            color: var(--color-text-light);
+            width: 100%;
+        }
+
+        .category-info h3 {
+            color: var(--color-text-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+
+        .category-info p {
+            color: var(--color-accent);
+            font-family: var(--font-heading);
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-info p svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            transition: var(--transition-fast);
+        }
+
+        .category-card:hover .category-info p svg {
+            transform: translateX(5px);
+        }
+
+        /* Home Process Section */
+        .home-process {
+            background-color: #FAF8F4;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .process-summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .process-image-wrapper {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            height: 400px;
+        }
+
+        .process-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .process-steps-brief {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .process-step-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .process-step-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+            color: var(--color-primary);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .process-step-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .process-step-text p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Why Us Section Home */
+        .why-us-brief-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        .why-us-card-brief {
+            background: white;
+            border: 1px solid var(--color-border);
+            padding: 2.5rem;
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .why-us-card-brief:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+            box-shadow: 0 15px 35px rgba(26, 58, 42, 0.05);
+        }
+
+        .why-us-icon-brief {
+            color: var(--color-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .why-us-icon-brief svg {
+            width: 40px;
+            height: 40px;
+            fill: currentColor;
+        }
+
+        .why-us-card-brief h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .why-us-card-brief p {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        /* Stats Banner */
+        .stats-section {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #CCCCCC;
+            font-family: var(--font-heading);
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Section */
+        .cta-banner {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light);
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-banner p {
+            color: #CCCCCC;
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 992px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card {
+                height: 350px;
+            }
+
+            .process-summary-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .process-image-wrapper {
+                height: 300px;
+            }
+
+            .why-us-brief-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+
+    <!-- Floating Navbar -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-transparent.png" class="logo-img" alt="Logo PT Kharisma Prima Abadi">
+                <span class="logo-text">KHARISMA PRIMA ABADI</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Beranda</a></li>
+                    <li><a href="tentang.html" class="nav-link">Tentang Kami</a></li>
+                    <li><a href="produk.html" class="nav-link">Produk</a></li>
+                    <li><a href="manufaktur.html" class="nav-link">Manufaktur</a></li>
+                    <li><a href="mengapa-kami.html" class="nav-link">Mengapa Kami</a></li>
+                    <li><a href="jaminan-mutu.html" class="nav-link">Jaminan Mutu</a></li>
+                    <li><a href="kontak.html" class="nav-link nav-cta">Hubungi Kami</a></li>
+                </ul>
+            </nav>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Hero Banner -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <img class="hero-media" src="assets/banner.png" alt="Proses Fermentasi Pabrik PT Kharisma Prima Abadi">
+        <div class="container">
+            <div class="hero-container reveal">
+                <span class="subtitle">B2B Food Manufacturer Partner</span>
+                <h1>Cita Rasa Autentik,<br>Standar Mutu Industri</h1>
+                <p>PT Kharisma Prima Abadi memproduksi kecap manis, cuka makan, dan saus sambal berkualitas tinggi
+                    dengan kapasitas skala industri besar untuk memasok jaringan distributor nasional, grosir, ritel
+                    modern, dan Horeka.</p>
+                <div class="hero-buttons">
+                    <a href="produk.html" class="btn btn-accent">Lihat Katalog B2B</a>
+                    <a href="kontak.html" class="btn btn-secondary" style="border-color: white; color: white;">Minta
+                        Penawaran Harga</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Statement / Company Overview -->
+    <section class="section-padding brand-statement">
+        <div class="container">
+            <div class="brand-statement-content reveal">
+                <span class="subtitle">Ikhtisar Perusahaan</span>
+                <h2>Penyedia Bahan Kuliner Utama dari Yogyakarta untuk Indonesia</h2>
+                <p>Didirikan di Yogyakarta, PT Kharisma Prima Abadi berdedikasi menjaga cita rasa Nusantara lewat
+                    produksi masal yang andal. Kami memadukan bahan alami pilihan terbaik dengan proses fabrikasi modern
+                    berstandar keamanan tinggi. Fokus utama kami adalah menjamin ketepatan pasokan, kualitas rasa yang
+                    konsisten, dan pemenuhan regulasi hukum nasional bagi kelancaran bisnis Anda.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Category Highlights -->
+    <section class="section-padding"
+        style="background-color: #F8F5F0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+        <div class="container">
+            <div class="reveal text-center" style="max-width: 600px; margin: 0 auto 3rem;">
+                <span class="subtitle">Produk Kami</span>
+                <h2>Tiga Pilar Cita Rasa Industri</h2>
+                <p>Kami menyediakan produk berkualitas tinggi dalam jumlah tonase besar dan pilihan kemasan komersial
+                    yang fleksibel.</p>
+            </div>
+
+            <div class="categories-grid reveal reveal-delay-1">
+                <!-- Card 1: Kecap -->
+                <div class="category-card" onclick="window.location.href='produk.html?cat=kecap'">
+                    <img class="category-image" src="assets/Kecap/Kecap Primasari Hijau 625 ml.png"
+                        alt="Kategori Kecap Manis & Asin">
+                    <div class="category-info">
+                        <h3>Kecap Manis &amp; Asin</h3>
+                        <p>Lihat Detail Spesifikasi <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg></p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Sambal -->
+                <div class="category-card" onclick="window.location.href='produk.html?cat=sambal'">
+                    <img class="category-image" src="assets/Sambal/Sambal 625 gr.png"
+                        alt="Kategori Saus Sambal & Tomat">
+                    <div class="category-info">
+                        <h3>Saus Sambal &amp; Tomat</h3>
+                        <p>Lihat Detail Spesifikasi <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg></p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Cuka -->
+                <div class="category-card" onclick="window.location.href='produk.html?cat=cuka'">
+                    <img class="category-image" src="assets/Cuka/Cuka.jpg" alt="Kategori Cuka Makan">
+                    <div class="category-info">
+                        <h3>Cuka Makan &amp; Asam</h3>
+                        <p>Lihat Detail Spesifikasi <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manufacturing Process Brief Section -->
+    <section class="section-padding home-process">
+        <div class="container">
+            <div class="process-summary-grid">
+                <div class="process-image-wrapper reveal">
+                    <img src="assets/factory_bottling.png" alt="Fasilitas Pembotolan Otomatis KPA">
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <span class="subtitle">Teknologi Produksi</span>
+                    <h2>Alur Manufaktur Higienis</h2>
+                    <p style="margin-bottom: 2rem;">Pabrik kami menerapkan proses produksi modern dengan sistem tertutup
+                        untuk meminimalkan kontaminasi dan menjaga kemurnian rasa bumbu.</p>
+
+                    <div class="process-steps-brief">
+                        <div class="process-step-item">
+                            <div class="process-step-dot">1</div>
+                            <div class="process-step-text">
+                                <h4>Seleksi Bahan Baku</h4>
+                                <p>Hanya menggunakan kedelai hitam alami premium dan cabai segar lokal dari petani
+                                    Yogyakarta.</p>
+                            </div>
+                        </div>
+                        <div class="process-step-item">
+                            <div class="process-step-dot">2</div>
+                            <div class="process-step-text">
+                                <h4>Pengolahan Otomatis</h4>
+                                <p>Proses fermentasi alami dan pemasakan menggunakan cooker tank stainless steel.</p>
+                            </div>
+                        </div>
+                        <div class="process-step-item">
+                            <div class="process-step-dot">3</div>
+                            <div class="process-step-text">
+                                <h4>Pengemasan &amp; QC Ketat</h4>
+                                <p>Pengisian botol dan pouch secara otomatis dilanjutkan pemeriksaan klinis
+                                    laboratorium.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="manufaktur.html" class="btn btn-secondary" style="margin-top: 2.5rem;">Pelajari Fasilitas
+                        Kami</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Brief Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="reveal text-center" style="max-width: 600px; margin: 0 auto 1rem;">
+                <span class="subtitle">Keunggulan KPA</span>
+                <h2>Mengapa Memilih Kami?</h2>
+                <p>Kami meletakkan kebutuhan bisnis mitra B2B sebagai pilar utama pelayanan pabrik kami.</p>
+            </div>
+
+            <div class="why-us-brief-grid reveal">
+                <!-- Card 1 -->
+                <div class="why-us-card-brief">
+                    <div class="why-us-icon-brief">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11v4h2v-4h3l-4-4-4 4h3z" />
+                        </svg>
+                    </div>
+                    <h4>Kapasitas Pasokan Tinggi</h4>
+                    <p>Fasilitas manufaktur berkapasitas ratusan ton per bulan, menjamin kelancaran stok usaha grosir
+                        dan ritel Anda tanpa keterlambatan.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="why-us-card-brief">
+                    <div class="why-us-icon-brief">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                        </svg>
+                    </div>
+                    <h4>Konsistensi Cita Rasa</h4>
+                    <p>Uji laboratorium organoleptik yang berkala memastikan profil rasa kecap, saus, dan cuka tidak
+                        pernah berubah dari waktu ke waktu.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="why-us-card-brief">
+                    <div class="why-us-icon-brief">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l5.59-5.59L17 9l-7 7z" />
+                        </svg>
+                    </div>
+                    <h4>Sertifikasi Legal Penuh</h4>
+                    <p>Seluruh jajaran produk telah memiliki nomor BPOM MD dan Ketetapan Halal Indonesia, siap
+                        dipasarkan secara ritel modern nasional.</p>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 3.5rem;">
+                <a href="mengapa-kami.html" class="btn btn-primary">Lihat Seluruh Keunggulan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Statistics -->
+    <section class="section-padding stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <h3>500+</h3>
+                    <p>Ton Kapasitas Bulanan</p>
+                </div>
+                <div class="stat-card reveal reveal-delay-1">
+                    <h3>100%</h3>
+                    <p>Bahan Pilihan Alami</p>
+                </div>
+                <div class="stat-card reveal reveal-delay-2">
+                    <h3>300+</h3>
+                    <p>Distributor &amp; Koki Mitra</p>
+                </div>
+                <div class="stat-card reveal reveal-delay-3">
+                    <h3>15+</h3>
+                    <p>Tahun Kepercayaan Kuliner</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- B2B Call to Action -->
+    <section class="section-padding cta-banner">
+        <div class="container">
+            <div class="cta-content reveal">
+                <span class="subtitle">Kerja Sama B2B</span>
+                <h2>Hubungi Tim Pemasaran Kami</h2>
+                <p>Kami siap mengirimkan penawaran harga grosir khusus, katalog produk cetak, serta contoh/sampel produk
+                    untuk tes rasa di tempat Anda.</p>
+                <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <a href="kontak.html" class="btn btn-accent">Hubungi Tim Sales</a>
+                    <a href="produk.html" class="btn btn-secondary"
+                        style="border-color: white; color: white;">Eksplorasi Produk</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo" style="margin-bottom: 1.5rem; display: inline-flex;">
+                        <img src="assets/logo-transparent.png" class="logo-img" alt="Logo PT Kharisma Prima Abadi">
+                    </a>
+                    <p>Produsen terpercaya saus sambal, cuka makan, dan kecap berkualitas tinggi dengan kapasitas
+                        manufaktur andal di Yogyakarta.</p>
+                    <div class="footer-certifications">
+                        <div class="footer-cert-badge">HALAL INDONESIA</div>
+                        <div class="footer-cert-badge">BPOM MD</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Halaman</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="tentang.html">Tentang Kami</a></li>
+                        <li><a href="produk.html">Katalog Produk</a></li>
+                        <li><a href="manufaktur.html">Manufaktur</a></li>
+                        <li><a href="mengapa-kami.html">Mengapa Kami</a></li>
+                        <li><a href="jaminan-mutu.html">Jaminan Mutu</a></li>
+                        <li><a href="kontak.html">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Produk B2B</h4>
+                    <ul class="footer-links">
+                        <li><a href="produk.html?cat=kecap">Kecap Manis Industri</a></li>
+                        <li><a href="produk.html?cat=kecap">Kecap Asin Horeka</a></li>
+                        <li><a href="produk.html?cat=sambal">Saus Sambal Grosir</a></li>
+                        <li><a href="produk.html?cat=cuka">Cuka Pangan Masal</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Kontak &amp; Pabrik</h4>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                        <span>Sleman, Daerah Istimewa Yogyakarta, Indonesia</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <span>sales@kharismaprimaabadi.co.id</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                        <span>+62 811-2345-6789 (Sales)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 PT Kharisma Prima Abadi. Semua Hak Cipta Dilindungi. Desain Profil Premium.</p>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="#" style="color: #8E9F95;">Syarat &amp; Ketentuan</a>
+                    <a href="#" style="color: #8E9F95;">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6281123456789?text=Halo%20Sales%20PT%20Kharisma%20Prima%20Abadi,%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20produk%20kecap/sambal/cuka%20untuk%20B2B."
+        class="whatsapp-float" target="_blank" aria-label="Kontak Sales via WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.592 1.97 14.12 .947 11.986.947c-5.442 0-9.87 4.372-9.875 9.802-.002 1.797.485 3.55 1.411 5.148l-.992 3.626 3.73-.974zm12.385-6.862c-.272-.136-1.61-.794-1.86-.885-.25-.091-.432-.136-.613.136-.182.273-.703.885-.862 1.068-.159.182-.318.205-.59.069-.272-.136-1.15-.424-2.19-1.354-.809-.722-1.354-1.616-1.513-1.888-.159-.272-.017-.42.12-.556.122-.122.272-.318.408-.477.136-.159.182-.272.272-.454.091-.182.045-.341-.023-.477-.068-.136-.613-1.477-.84-2.023-.22-.53-.443-.458-.613-.466-.159-.008-.34-.01-.522-.01s-.477.068-.727.341c-.25.272-.954.932-.954 2.273s.977 2.636 1.114 2.818c.136.182 1.92 2.931 4.653 4.114.65.281 1.157.449 1.553.575.653.208 1.248.178 1.718.108.524-.078 1.61-.659 1.838-1.296.227-.636.227-1.182.159-1.296-.068-.114-.25-.182-.523-.318z" />
+        </svg>
+    </a>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

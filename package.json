@@ -1,0 +1,17 @@
+{
+  "name": "pt-kharisma-prima-abadi",
+  "version": "1.0.0",
+  "description": "Premium B2B company profile website for PT Kharisma Prima Abadi",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Pelajari keunggulan PT Kharisma Prima Abadi sebagai mitra B2B saus, kecap, dan cuka pilihan Anda. Keandalan pasokan, harga bersaing, dan konsistensi rasa.">
+    <title>Mengapa Memilih Kami | PT Kharisma Prima Abadi</title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Why Choose Us Page Specific Styles */
+        .why-hero {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light);
+            padding: 10rem 0 5rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .why-hero h1 {
+            color: var(--color-text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Pillars Grid */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3.5rem;
+        }
+
+        .pillar-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            padding: 3rem;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.01);
+            transition: var(--transition-smooth);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+            box-shadow: 0 15px 35px rgba(26, 58, 42, 0.04);
+        }
+
+        .pillar-icon {
+            width: 56px;
+            height: 56px;
+            background-color: rgba(139, 0, 0, 0.1);
+            color: var(--color-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .pillar-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .pillar-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Partner Sectors */
+        .sectors-section {
+            background-color: #FAF8F4;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        .sector-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            padding: 2.5rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .sector-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-primary);
+        }
+
+        .sector-card p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        @media (max-width: 992px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sectors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+
+    <!-- Floating Navbar -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-transparent.png" class="logo-img" alt="Logo PT Kharisma Prima Abadi">
+                <span class="logo-text">KHARISMA PRIMA ABADI</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="tentang.html" class="nav-link">Tentang Kami</a></li>
+                    <li><a href="produk.html" class="nav-link">Produk</a></li>
+                    <li><a href="manufaktur.html" class="nav-link">Manufaktur</a></li>
+                    <li><a href="mengapa-kami.html" class="nav-link active">Mengapa Kami</a></li>
+                    <li><a href="jaminan-mutu.html" class="nav-link">Jaminan Mutu</a></li>
+                    <li><a href="kontak.html" class="nav-link nav-cta">Hubungi Kami</a></li>
+                </ul>
+            </nav>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header Hero -->
+    <section class="why-hero">
+        <div class="container">
+            <div class="reveal">
+                <span class="subtitle">Kelebihan KPA</span>
+                <h1>Mengapa Memilih Kami?</h1>
+                <p style="max-width: 600px; margin: 1rem auto 0; color: #CCCCCC;">Komitmen kami dalam mengutamakan
+                    kebutuhan pertumbuhan bisnis Anda lewat rantai pasok bumbu masak yang stabil dan bersahabat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Empat Pilar Utama -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="reveal text-center" style="max-width: 600px; margin: 0 auto;">
+                <span class="subtitle">Pilar Layanan B2B</span>
+                <h2>Nilai Tambah untuk Bisnis Anda</h2>
+                <p>Kami menyusun sistem kerja pabrik demi mengedepankan kelancaran bisnis mitra kuliner KPA di lapangan.
+                </p>
+            </div>
+
+            <div class="pillars-grid reveal">
+                <!-- Pilar 1 -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 8h-3V4H3v12h14v-4h3V8zm-1 3h-2V9h2v2zM5 15v-2h10v2H5zm10-3H5V9h10v3zm0-4H5V5h10v3z" />
+                        </svg>
+                    </div>
+                    <h3>Keandalan Pasokan Logistik</h3>
+                    <p>Melalui kapasitas mixing dan bottling otomatis yang besar, kami mampu menyediakan ketersediaan
+                        stok kecap, cuka, dan saus secara konstan. Meminimalkan risiko kekosongan barang di gudang
+                        distributor maupun rak ritel modern Anda.</p>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 11.9 13 12.5 13 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+                        </svg>
+                    </div>
+                    <h3>Profil Rasa yang Konsisten</h3>
+                    <p>Koki restoran dan konsumen akhir sangat menghargai kestabilan rasa. Laboratorium R&amp;D kami
+                        mengontrol ketat tingkat viskositas kecap, keasaman cuka, dan tingkat kepedasan sambal agar
+                        profil rasa produk kami selalu seragam di setiap pengiriman.</p>
+                </div>
+
+                <!-- Pilar 3 -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                        </svg>
+                    </div>
+                    <h3>Dukungan Legalitas Penuh</h3>
+                    <p>Setiap produk PT Kharisma Prima Abadi terdaftar secara hukum di BPOM RI MD dan mengantongi
+                        sertifikat Halal resmi dari MUI. Kami memudahkan audit internal bagi perusahaan katering besar
+                        dan audit rantai pasok hotel/restoran ternama.</p>
+                </div>
+
+                <!-- Pilar 4 -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </div>
+                    <h3>Harga Grosir Kompetitif B2B</h3>
+                    <p>Kami memahami kalkulasi margin keuntungan bisnis Anda. Sebagai produsen langsung tangan pertama,
+                        kami menawarkan skema harga grosir bertingkat yang bersahabat sesuai volume pemesanan kontainer
+                        atau truk logistik Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sektor Penggunaan Partner -->
+    <section class="section-padding sectors-section">
+        <div class="container">
+            <div class="reveal text-center" style="max-width: 600px; margin: 0 auto;">
+                <span class="subtitle">Aplikasi Bisnis</span>
+                <h2>Melayani Berbagai Sektor Industri</h2>
+                <p>Jajaran produk kami diformulasikan tangguh untuk memenuhi standar kebutuhan operasional berbagai
+                    sektor komersial kuliner.</p>
+            </div>
+
+            <div class="sectors-grid reveal">
+                <!-- Sektor 1 -->
+                <div class="sector-card">
+                    <h4>Distributor Bahan Pangan</h4>
+                    <p>Sangat ideal untuk didistribusikan kembali ke toko grosir, pasar tradisional, minimarket lokal,
+                        dan pedagang kelontong lewat kemasan botol siap jual.</p>
+                </div>
+
+                <!-- Sektor 2 -->
+                <div class="sector-card">
+                    <h4>Jaringan Ritel Modern</h4>
+                    <p>Spesifikasi kemasan barcode siap jual, lengkap dengan legalitas BPOM MD dan sertifikat Halal
+                        Indonesia untuk dipajang langsung di rak supermarket.</p>
+                </div>
+
+                <!-- Sektor 3 -->
+                <div class="sector-card">
+                    <h4>Katering &amp; Horeka</h4>
+                    <p>Kemasan pouch plastik 1kg dan jerigen industri 5kg memudahkan koki menakar bumbu secara efisien
+                        untuk ribuan porsi masakan setiap hari.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo" style="margin-bottom: 1.5rem; display: inline-flex;">
+                        <img src="assets/logo-transparent.png" class="logo-img" alt="Logo PT Kharisma Prima Abadi">
+                    </a>
+                    <p>Produsen terpercaya saus sambal, cuka makan, dan kecap berkualitas tinggi dengan kapasitas
+                        manufaktur andal di Yogyakarta.</p>
+                    <div class="footer-certifications">
+                        <div class="footer-cert-badge">HALAL INDONESIA</div>
+                        <div class="footer-cert-badge">BPOM MD</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Halaman</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="tentang.html">Tentang Kami</a></li>
+                        <li><a href="produk.html">Katalog Produk</a></li>
+                        <li><a href="manufaktur.html">Manufaktur</a></li>
+                        <li><a href="mengapa-kami.html">Mengapa Kami</a></li>
+                        <li><a href="jaminan-mutu.html">Jaminan Mutu</a></li>
+                        <li><a href="kontak.html">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Produk B2B</h4>
+                    <ul class="footer-links">
+                        <li><a href="produk.html?cat=kecap">Kecap Manis Industri</a></li>
+                        <li><a href="produk.html?cat=kecap">Kecap Asin Horeka</a></li>
+                        <li><a href="produk.html?cat=sambal">Saus Sambal Grosir</a></li>
+                        <li><a href="produk.html?cat=cuka">Cuka Pangan Masal</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Kontak &amp; Pabrik</h4>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                        <span>Sleman, Daerah Istimewa Yogyakarta, Indonesia</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <span>sales@kharismaprimaabadi.co.id</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                        <span>+62 811-2345-6789 (Sales)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 PT Kharisma Prima Abadi. Semua Hak Cipta Dilindungi. Desain Profil Premium.</p>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="#" style="color: #8E9F95;">Syarat &amp; Ketentuan</a>
+                    <a href="#" style="color: #8E9F95;">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6281123456789?text=Halo%20Sales%20PT%20Kharisma%20Prima%20Abadi,%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20produk%20kecap/sambal/cuka%20untuk%20B2B."
+        class="whatsapp-float" target="_blank" aria-label="Kontak Sales via WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.592 1.97 14.12 .947 11.986.947c-5.442 0-9.87 4.372-9.875 9.802-.002 1.797.485 3.55 1.411 5.148l-.992 3.626 3.73-.974zm12.385-6.862c-.272-.136-1.61-.794-1.86-.885-.25-.091-.432-.136-.613.136-.182.273-.703.885-.862 1.068-.159.182-.318.205-.59.069-.272-.136-1.15-.424-2.19-1.354-.809-.722-1.354-1.616-1.513-1.888-.159-.272-.017-.42.12-.556.122-.122.272-.318.408-.477.136-.159.182-.272.272-.454.091-.182.045-.341-.023-.477-.068-.136-.613-1.477-.84-2.023-.22-.53-.443-.458-.613-.466-.159-.008-.34-.01-.522-.01s-.477.068-.727.341c-.25.272-.954.932-.954 2.273s.977 2.636 1.114 2.818c.136.182 1.92 2.931 4.653 4.114.65.281 1.157.449 1.553.575.653.208 1.248.178 1.718.108.524-.078 1.61-.659 1.838-1.296.227-.636.227-1.182.159-1.296-.068-.114-.25-.182-.523-.318z" />
+        </svg>
+    </a>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
