@@ -1,7 +1,7 @@
 {
   "name": "pt-kharisma-prima-abadi",
   "version": "1.0.0",
-  "description": "Premium B2B company profile website for PT Kharisma Prima Abadi",
+  "description": "Premium company profile website for PT Kharisma Prima Abadi",
   "main": "index.html",
   "scripts": {
     "dev": "vite",
